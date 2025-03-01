@@ -92,22 +92,6 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <div className='relative'>
-            <FaRegHeart className='h-5 w-5 cursor-pointer hover:text-primary transition-all duration-300' />
-            <span className='absolute h-4 w-4 bg-primary rounded-full text-xs text-white flex items-center justify-center -top-2 -right-2'>
-              0
-            </span>
-          </div>
-          <Link href={'/cart'}>
-            <div className='relative'>
-              <CiShoppingCart className='h-5 w-5 cursor-pointer hover:text-primary transition-all duration-300' />
-              {data1 && data1?.cart?.length > 0 && (
-                <span className='absolute h-4 w-4 bg-priamry rounded-full text-xs text-white flex items-center justify-center -top-2 -right-2'>
-                  {data1.cart.length}
-                </span>
-              )}
-            </div>
-          </Link>
         </div>
       </div>
     </div>
