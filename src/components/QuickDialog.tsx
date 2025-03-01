@@ -33,42 +33,7 @@ export function QuickDialog({ id }: { id: string }) {
     console.log(data, 'quick dialog 2');
   }, [data]);
   console.log(data, 'quick dialog');
-  const handleAddToCart = () => {
-    const addData = {
-      price: product?.price,
-      quantity: 1,
-      size: product?.size[size],
-      color: product?.colors[selectedColors],
-      title: product?.title,
-      id: product?.id,
-      img: product?.img,
-      category: product?.category,
-    };
-    if (
-      addData.price &&
-      addData.size &&
-      addData.color &&
-      addData.title &&
-      addData.id &&
-      addData.img &&
-      addData.category
-    ) {
-      const findId = data.cart.find((dt) => dt.id === addData.id);
-      const findSize = data.cart.find((dt) => dt.size === addData.size);
-      const findColor = data.cart.find((dt) => dt.color === addData.color);
-      if (!findId || !findSize || !findColor) {
-        dispatch(addToCart(addData));
-        toast({
-          description: 'Product Add To Cart.',
-        });
-      } else {
-        toast({
-          variant: 'destructive',
-          description: 'Product Already Added.',
-        });
-      }
-    }
-  };
+  const whatsappLink = `https://wa.me/+8801786224382?text=Hi%2C%20I%20want%20to%20purchase%20this%20product%3A%0A%0A%20%20Title%3A%20${product?.title}%0A%20%20Price%3A%20${product?.price}%0A%20%20Size%3A%20${product?.size[size]}`;
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -144,15 +109,17 @@ export function QuickDialog({ id }: { id: string }) {
               ))}
             </div>
           </div>
-          <DialogFooter className='mx-auto'>
-            <Button
-              onClick={handleAddToCart}
-              className='bg-black px-10 text-white font-albert font-bold'
-              type='submit'
+          <div className='mx-auto'>
+            <a
+              href={whatsappLink}
+              target='_blank'
+              onClick={(e) => e.stopPropagation()}
+              rel='noopener noreferrer'
+              className='bg-black px-10 py-2 z-50 rounded-md text-white font-albert font-bold'
             >
-              Add To Cart
-            </Button>
-          </DialogFooter>
+              Order Now
+            </a>
+          </div>
         </DialogContent>
       )}
     </Dialog>

@@ -173,7 +173,7 @@ export function QuickView({ id }: { id: string }) {
                     onClick={handleAddToCart}
                     className='bg-black px-10 text-white'
                   >
-                    Add To Cart
+                    Order Now
                   </Button>
                 </div>
 
@@ -268,7 +268,7 @@ export function QuickView({ id }: { id: string }) {
                     onClick={handleAddToCart}
                     className='bg-black px-10 text-white'
                   >
-                    Add To Cart
+                    Order Now
                   </Button>
                 </div>
 
