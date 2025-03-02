@@ -1,5 +1,19 @@
 'use client';
-
+type ProductFormValues = {
+  title: string;
+  price: string;
+  description: string;
+  category: string[];
+  sizes: string[];
+  colors: {
+    hex: string;
+    color: string;
+    fakeImg?: string;
+    image?: File | null;
+  }[];
+  img?: File | null;
+  img1?: File | null;
+};
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { X, Plus, Upload, Trash2 } from 'lucide-react';
@@ -32,7 +46,7 @@ export default function AddProductForm() {
     watch,
     formState: { errors },
     setError,
-  } = useForm({
+  } = useForm<ProductFormValues>({
     defaultValues: {
       title: '',
       price: '',
@@ -42,7 +56,7 @@ export default function AddProductForm() {
       colors: [],
     },
     resolver: (values) => {
-      const errors = {};
+      const errors: Record<string, { message: string }> = {};
 
       if (!values.title) {
         errors.title = { message: 'Product title is required' };
@@ -75,10 +89,21 @@ export default function AddProductForm() {
     },
   });
 
-  const [mainImage, setMainImage] = useState(null);
-  const [secondaryImage, setSecondaryImage] = useState(null);
+  const [mainImage, setMainImage] = useState<string | null>(null);
+  const [secondaryImage, setSecondaryImage] = useState<string | null>(null);
   const [colorPickerOpen, setColorPickerOpen] = useState(false);
-  const [currentColor, setCurrentColor] = useState({
+  // const [currentColor, setCurrentColor] = useState({
+  //   hex: '#000000',
+  //   name: '',
+  //   image: null,
+  //   imagePreview: null,
+  // });
+  const [currentColor, setCurrentColor] = useState<{
+    hex: string;
+    name: string;
+    image: File | null;
+    imagePreview: string | null;
+  }>({
     hex: '#000000',
     name: '',
     image: null,
@@ -88,7 +113,7 @@ export default function AddProductForm() {
 
   const watchedColors = watch('colors') || [];
 
-  const handleMainImageChange = (e) => {
+  const handleMainImageChange = (e: any) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setMainImage(URL.createObjectURL(file));
@@ -96,7 +121,7 @@ export default function AddProductForm() {
     }
   };
 
-  const handleSecondaryImageChange = (e) => {
+  const handleSecondaryImageChange = (e: any) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setSecondaryImage(URL.createObjectURL(file));
@@ -104,28 +129,28 @@ export default function AddProductForm() {
     }
   };
 
-  const addColor = () => {
-    if (currentColor.name.trim() === '') return;
+  // const addColor = () => {
+  //   if (currentColor.name.trim() === '') return;
 
-    const newColor = {
-      hex: currentColor.hex,
-      color: currentColor.name,
-      fakeImg: currentColor.image,
-    };
-    console.log(newColor, 'newColor');
+  //   const newColor = {
+  //     hex: currentColor.hex,
+  //     color: currentColor.name,
+  //     fakeImg: currentColor.image,
+  //   };
+  //   console.log(newColor, 'newColor');
 
-    setValue('colors', [...watchedColors, newColor]);
-    setCurrentColor({ hex: '#000000', name: '' });
-    setColorPickerOpen(false);
-  };
+  //   setValue('colors', [...watchedColors, newColor]);
+  //   setCurrentColor({ hex: '#000000', name: '' });
+  //   setColorPickerOpen(false);
+  // };
 
-  const removeColor = (index) => {
+  const removeColor = (index: number) => {
     const updatedColors = [...watchedColors];
     updatedColors.splice(index, 1);
     setValue('colors', updatedColors);
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     setIsUploading(true);
     if (watchedColors.length === 0) {
       setError('colors', {
@@ -147,12 +172,15 @@ export default function AddProductForm() {
       // Then, upload each color image and update the URLs
       const processedColors = await Promise.all(
         watchedColors.map(async (color) => {
-          const fakeImageUrl = await uploadImageInImgBb(color.image);
-          return {
-            hex: color.hex,
-            color: color.color,
-            fakeImg: fakeImageUrl,
-          };
+          if (color.image) {
+            console.log(color, 'color.image');
+            const fakeImageUrl = await uploadImageInImgBb(color.image);
+            return {
+              hex: color.hex,
+              color: color.color,
+              fakeImg: fakeImageUrl,
+            };
+          }
         })
       );
 
@@ -461,7 +489,7 @@ export default function AddProductForm() {
               <div className='p-4 border rounded-md space-y-4'>
                 <HexColorPicker
                   color={currentColor.hex}
-                  onChange={(color) =>
+                  onChange={(color: any) =>
                     setCurrentColor({ ...currentColor, hex: color })
                   }
                 />

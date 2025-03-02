@@ -1,8 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
-export function HexColorPicker({ color, onChange }) {
+interface ColorPicker {
+  color: string;
+  onChange: (color: string) => void;
+}
+export function HexColorPicker({ color, onChange }: ColorPicker) {
   const [internalColor, setInternalColor] = useState(color || '#000000');
 
   useEffect(() => {
@@ -11,7 +14,7 @@ export function HexColorPicker({ color, onChange }) {
     }
   }, [color, internalColor]); // Added internalColor to dependencies
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const newColor = e.target.value;
     setInternalColor(newColor);
     onChange(newColor);
