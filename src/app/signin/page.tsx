@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase/product';
 const SignInPage = () => {
   const handleGitHubSignIn = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
+      provider: 'google',
     });
     if (error) console.error('Error signing in:', error.message);
   };
@@ -16,7 +16,7 @@ const SignInPage = () => {
           onClick={handleGitHubSignIn}
           className='w-full p-4 bg-black text-white rounded'
         >
-          Sign In with GitHub
+          Sign In with Google
         </button>
       </div>
     </div>

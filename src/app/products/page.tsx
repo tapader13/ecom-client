@@ -176,6 +176,7 @@ export default function AddProductForm() {
         setIsUploading(false);
         return;
       }
+      if (insertData) toast.success('Product added successfully');
       // if (data) toast.success('Product added successfully');
       // console.log(data, 'data');
     } catch (error) {
