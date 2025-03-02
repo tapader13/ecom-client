@@ -15,7 +15,7 @@ const ProductDetails = ({ params }: { params: { title: string } }) => {
   const title = decodeURIComponent(params.title);
   const { proDlts, getProductDlts } = useSupabase();
   const [size, setSize] = useState(0);
-  const [selectedColors, setSelectedColors] = useState<number>(1);
+  const [selectedColors, setSelectedColors] = useState<number>(0);
   const [imageSrc, setImageSrc] = useState(query);
   const dispatch = useAppDispatch();
   useEffect(() => {

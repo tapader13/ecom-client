@@ -24,9 +24,9 @@ const Boundle = () => {
   const { product2, getBoundleProduct2 } = useSupabase();
   const { product3, getBoundleProduct3 } = useSupabase();
   useEffect(() => {
-    getBoundleProduct1('2');
-    getBoundleProduct2('5');
-    getBoundleProduct3('12');
+    getBoundleProduct2('0a3ab152-ebac-48c4-936c-27d0bac513c2');
+    getBoundleProduct1('0a3ab152-ebac-48c4-936c-27d0bac513c2');
+    getBoundleProduct3('0a3ab152-ebac-48c4-936c-27d0bac513c2');
   }, []);
   const handleBundle = () => {
     dispatch(
@@ -72,7 +72,7 @@ const Boundle = () => {
       })
     );
   };
-
+  console.log(product2, 'product2');
   return (
     <div className='mt-7'>
       <div className='cont bg-[#F8F8F8] sm:px-10 py-16 grid sm:grid-cols-2 grid-cols-1'>
@@ -117,10 +117,10 @@ const Boundle = () => {
                 >
                   {product2?.size.map((size, index) => (
                     <option
-                      key={`${size}/${product2?.colors[index].color}`}
-                      value={`${size}/${product2?.colors[index].color}`}
+                      key={`${size}/${product2?.colors[index]?.color}`}
+                      value={`${size}/${product2?.colors[index]?.color}`}
                     >
-                      {`${size}/${product2?.colors[index].color}`}
+                      {`${size}/${product2?.colors[index]?.color}`}
                     </option>
                   ))}
                 </select>
@@ -207,10 +207,10 @@ const Boundle = () => {
                 >
                   {product1?.size.map((size, index) => (
                     <option
-                      key={`${size}/${product1?.colors[index].color}`}
-                      value={`${size}/${product1?.colors[index].color}`}
+                      key={`${size}/${product1?.colors[index]?.color}`}
+                      value={`${size}/${product1?.colors[index]?.color}`}
                     >
-                      {`${size}/${product1?.colors[index].color}`}
+                      {`${size}/${product1?.colors[index]?.color}`}
                     </option>
                   ))}
                 </select>

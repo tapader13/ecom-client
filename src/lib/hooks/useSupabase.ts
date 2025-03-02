@@ -224,6 +224,7 @@ export const useSupabase = () => {
           colors,
         };
       });
+      console.log(parsedData[0], 'parsedData[0]');
 
       setProduct2(parsedData[0]);
     }
