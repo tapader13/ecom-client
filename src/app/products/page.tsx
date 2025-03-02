@@ -16,6 +16,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { HexColorPicker } from '@/components/HexColorPicker';
+import { uploadImageInImgBb } from '@/lib/uploadImage';
 
 const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const categories = ['newrelease', 'women', 'men', 'boundel', 'frontpage'];
@@ -140,7 +141,10 @@ export default function AddProductForm() {
 
     try {
       // First, upload the main product images
-      const mainImageUrl = mainImage || '/placeholder.svg?height=400&width=400';
+      const mainImageUrl = await uploadImageInImgBb(data.img);
+
+      console.log(mainImageUrl, 'mainImageUrl');
+
       const secondaryImageUrl =
         secondaryImage || '/placeholder.svg?height=400&width=400';
 
@@ -167,6 +171,7 @@ export default function AddProductForm() {
         colors: JSON.stringify(processedColors),
         size: JSON.stringify(data.sizes),
       };
+      console.log(formattedData, 'formattedData');
     } catch (error) {
       console.error('Error processing product:', error);
       alert('An error occurred while adding the product');
