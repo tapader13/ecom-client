@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
+import toast from 'react-hot-toast';
 import {
   Card,
   CardContent,
@@ -17,6 +18,7 @@ import {
 } from '@/components/ui/card';
 import { HexColorPicker } from '@/components/HexColorPicker';
 import { uploadImageInImgBb } from '@/lib/uploadImage';
+import { supabase } from '@/lib/supabase/product';
 
 const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const categories = ['newrelease', 'women', 'men', 'boundel', 'frontpage'];
@@ -108,11 +110,9 @@ export default function AddProductForm() {
     const newColor = {
       hex: currentColor.hex,
       color: currentColor.name,
-      fakeImg: `https://via.placeholder.com/100/${currentColor.hex.replace(
-        '#',
-        ''
-      )}`,
+      fakeImg: currentColor.image,
     };
+    console.log(newColor, 'newColor');
 
     setValue('colors', [...watchedColors, newColor]);
     setCurrentColor({ hex: '#000000', name: '' });
@@ -136,27 +136,22 @@ export default function AddProductForm() {
       return;
     }
 
-    // In a real app, you would upload images to a server here
-    // For this example, we'll simulate the upload process
-
     try {
       // First, upload the main product images
       const mainImageUrl = await uploadImageInImgBb(data.img);
 
-      console.log(mainImageUrl, 'mainImageUrl');
+      console.log(data.img, 'mainImageUrl');
 
-      const secondaryImageUrl =
-        secondaryImage || '/placeholder.svg?height=400&width=400';
+      const secondaryImageUrl = await uploadImageInImgBb(data.img1);
 
       // Then, upload each color image and update the URLs
       const processedColors = await Promise.all(
         watchedColors.map(async (color) => {
-          // In a real app, you would upload the image file here
-          // For this example, we'll just use the preview URL
+          const fakeImageUrl = await uploadImageInImgBb(color.image);
           return {
             hex: color.hex,
             color: color.color,
-            fakeImg: color.fakeImg,
+            fakeImg: fakeImageUrl,
           };
         })
       );
@@ -169,12 +164,23 @@ export default function AddProductForm() {
         img: mainImageUrl,
         img1: secondaryImageUrl,
         colors: JSON.stringify(processedColors),
-        size: JSON.stringify(data.sizes),
+        size: data.sizes,
       };
       console.log(formattedData, 'formattedData');
+      const { data: insertData, error } = await supabase
+        .from('products')
+        .insert([formattedData]);
+      if (error) {
+        console.log(error, 'error');
+        toast.error('An error occurred while adding the product');
+        setIsUploading(false);
+        return;
+      }
+      // if (data) toast.success('Product added successfully');
+      // console.log(data, 'data');
     } catch (error) {
       console.error('Error processing product:', error);
-      alert('An error occurred while adding the product');
+      toast.error('An error occurred while adding the product');
     } finally {
       setIsUploading(false);
     }
@@ -442,7 +448,9 @@ export default function AddProductForm() {
                 type='button'
                 variant='outline'
                 size='sm'
-                onClick={() => setColorPickerOpen(true)}
+                onClick={() => {
+                  setColorPickerOpen(true);
+                }}
               >
                 <Plus className='h-4 w-4 mr-1' /> Add Color
               </Button>
@@ -532,11 +540,11 @@ export default function AddProductForm() {
                     type='button'
                     onClick={() => {
                       if (!currentColor.name.trim()) {
-                        alert('Please enter a color name');
+                        toast.error('Please enter a color name');
                         return;
                       }
                       if (!currentColor.imagePreview) {
-                        alert('Please upload an image for this color');
+                        toast.error('Please upload an image for this color');
                         return;
                       }
 
@@ -546,7 +554,7 @@ export default function AddProductForm() {
                         fakeImg: currentColor.imagePreview,
                         image: currentColor.image,
                       };
-
+                      console.log(newColor, 'color');
                       setValue('colors', [...watchedColors, newColor]);
                       setCurrentColor({
                         hex: '#000000',
