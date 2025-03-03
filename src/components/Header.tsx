@@ -43,6 +43,15 @@ const Header = () => {
         </div>
 
         <div className='flex gap-5 items-center'>
+          {userData &&
+            userData?.user?.user_metadata?.email ===
+              process.env.NEXT_PUBLIC_EMAIL_ADDRESS && (
+              <div>
+                <Link href={'/products'} className=' cursor-pointer'>
+                  Add Product
+                </Link>
+              </div>
+            )}
           <div>
             <SearchPart />
           </div>
