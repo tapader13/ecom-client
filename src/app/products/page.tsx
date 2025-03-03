@@ -3,6 +3,7 @@ type ProductFormValues = {
   title: string;
   price: string;
   description: string;
+  brand: string;
   category: string[];
   sizes: string[];
   colors: {
@@ -51,6 +52,7 @@ export default function AddProductForm() {
       title: '',
       price: '',
       description: '',
+      brand: '',
       category: [],
       sizes: [],
       colors: [],
@@ -68,6 +70,9 @@ export default function AddProductForm() {
 
       if (!values.description) {
         errors.description = { message: 'Description is required' };
+      }
+      if (!values.brand) {
+        errors.brand = { message: 'Brand is required' };
       }
 
       if (!values.category || values.category.length === 0) {
@@ -166,7 +171,7 @@ export default function AddProductForm() {
       const mainImageUrl = await uploadImageInImgBb(data.img);
 
       console.log(data.img, 'mainImageUrl');
-
+      //TODO: secure this page using middleware
       const secondaryImageUrl = await uploadImageInImgBb(data.img1);
 
       // Then, upload each color image and update the URLs
@@ -216,7 +221,7 @@ export default function AddProductForm() {
   };
 
   return (
-    <Card className='max-w-3xl mx-auto'>
+    <Card className='max-w-3xl mx-auto mt-10'>
       <CardHeader>
         <CardTitle>Add New Product</CardTitle>
         <CardDescription>
@@ -384,6 +389,26 @@ export default function AddProductForm() {
                   </p>
                 )}
               </div>
+
+              {/* Product Brand */}
+              <div className='space-y-2'>
+                <Label htmlFor='brand'>Product Brand</Label>
+                <Input
+                  id='brand'
+                  {...register('brand', {
+                    required: 'Product brand is required',
+                    minLength: {
+                      value: 3,
+                      message: 'Brand must be at least 3 characters',
+                    },
+                  })}
+                />
+                {errors.brand && (
+                  <p className='text-sm text-destructive'>
+                    {errors.brand.message}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 
@@ -481,7 +506,7 @@ export default function AddProductForm() {
                   setColorPickerOpen(true);
                 }}
               >
-                <Plus className='h-4 w-4 mr-1' /> Add Color
+                <Plus className='h-4 w-4 mr-1' /> Add Coloring Images
               </Button>
             </div>
 
@@ -567,6 +592,8 @@ export default function AddProductForm() {
                 <div className='flex gap-2 justify-end'>
                   <Button
                     type='button'
+                    variant={'outline'}
+                    size='lg'
                     onClick={() => {
                       if (!currentColor.name.trim()) {
                         toast.error('Please enter a color name');
@@ -594,11 +621,12 @@ export default function AddProductForm() {
                       setColorPickerOpen(false);
                     }}
                   >
-                    Add Color
+                    Add Coloring Images
                   </Button>
                   <Button
                     type='button'
                     variant='outline'
+                    size='lg'
                     onClick={() => {
                       setCurrentColor({
                         hex: '#000000',
@@ -667,6 +695,7 @@ export default function AddProductForm() {
           {/* Submit Button */}
           <Button
             type='submit'
+            variant={'outline'}
             disabled={isUploading || !mainImage || !secondaryImage}
             className='w-full'
           >
