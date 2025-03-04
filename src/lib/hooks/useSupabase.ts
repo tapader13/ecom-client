@@ -29,6 +29,7 @@ interface DynamicData {
 export const useSupabase = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [shirtProducts, setShirtProducts] = useState<Product[]>([]);
+  const [pantProducts, setPantProducts] = useState<Product[]>([]);
   const [product, setProduct] = useState<Product>();
   const [proDlts, setProDlts] = useState<Product>();
   const [menProduct, setMenProduct] = useState<Product[]>([]);
@@ -101,6 +102,39 @@ export const useSupabase = () => {
       });
 
       setShirtProducts(parsedData);
+    }
+  };
+  const getPantItems = async (str: string) => {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .ilike('category', `%${str}%`);
+
+    if (error) {
+      console.log(error.message);
+      return;
+    }
+
+    if (data) {
+      const parsedData = data.map((product) => {
+        // Check if colors need parsing
+        let colors: Color[] = [];
+        try {
+          colors =
+            typeof product.colors === 'string'
+              ? JSON.parse(product.colors)
+              : product.colors;
+        } catch (e) {
+          console.error('Error parsing colors:', e);
+        }
+
+        return {
+          ...product,
+          colors,
+        };
+      });
+
+      setPantProducts(parsedData);
     }
   };
   const getSingleProduct = async (id: string) => {
@@ -404,6 +438,8 @@ export const useSupabase = () => {
     product3,
     dynamicProduct,
     srcProduct,
+    pantProducts,
+    getPantItems,
     shirtProducts,
     getShirtItems,
     getSrcProduct,

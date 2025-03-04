@@ -10,19 +10,23 @@ const ShirtItems = () => {
     getShirtItems();
   }, []);
   return (
-    <div className='sm:mt-20 mt-5'>
+    <>
       {shirtProducts.length > 0 && (
-        <div className='cont'>
-          <div className='flex justify-between items-center'>
-            <h1 className='text-4xl leading-[90px] font-young'>Shirt Items</h1>
-            <div>1</div>
-          </div>
-          <div>
-            <CarosulShirtItems />
+        <div className='sm:mt-20 mt-5'>
+          <div className='cont'>
+            <div className='flex justify-between items-center'>
+              <h1 className='text-4xl leading-[90px] font-young'>
+                Shirt Items
+              </h1>
+              <div>1</div>
+            </div>
+            <div>
+              <CarosulNewRelase products={shirtProducts} />
+            </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

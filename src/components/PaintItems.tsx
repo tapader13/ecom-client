@@ -4,13 +4,13 @@ import { CarosulNewRelase } from './CarosulNewRelase';
 import { useSupabase } from '@/lib/hooks/useSupabase';
 
 const PaintItems = () => {
-  const { shirtProducts, getShirtItems } = useSupabase();
+  const { pantProducts, getPantItems } = useSupabase();
   useEffect(() => {
-    getShirtItems();
+    getPantItems('pant');
   }, []);
   return (
     <>
-      {shirtProducts && (
+      {pantProducts.length > 0 && (
         <div className='sm:mt-20 mt-5'>
           <div className='cont'>
             <div className='flex justify-between items-center'>
@@ -20,7 +20,7 @@ const PaintItems = () => {
               <div>1</div>
             </div>
             <div>
-              <CarosulNewRelase />
+              <CarosulNewRelase products={pantProducts} />
             </div>
           </div>
         </div>

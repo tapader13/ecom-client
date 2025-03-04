@@ -1,7 +1,13 @@
-import React from 'react';
+'use client';
+import React, { useEffect } from 'react';
 import { CarosulNewRelase } from './CarosulNewRelase';
+import { useSupabase } from '@/lib/hooks/useSupabase';
 
 const NewRelease = () => {
+  const { products, getNewReleaseProduct } = useSupabase();
+  useEffect(() => {
+    getNewReleaseProduct();
+  }, []);
   return (
     <div className='sm:mt-20 mt-5'>
       <div className='cont'>
@@ -10,7 +16,7 @@ const NewRelease = () => {
           <div>1</div>
         </div>
         <div>
-          <CarosulNewRelase />
+          <CarosulNewRelase products={products} />
         </div>
       </div>
     </div>
