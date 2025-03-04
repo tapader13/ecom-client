@@ -36,7 +36,17 @@ import { uploadImageInImgBb } from '@/lib/uploadImage';
 import { supabase } from '@/lib/supabase/product';
 
 const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-const categories = ['newrelease', 'women', 'men', 'boundel', 'frontpage'];
+const categories = [
+  'newrelease',
+  'women',
+  'men',
+  'boundel',
+  'frontpage',
+  'shirt',
+  'jeans',
+  'pants',
+  'shorts',
+];
 
 export default function AddProductForm() {
   const {
@@ -193,6 +203,7 @@ export default function AddProductForm() {
         title: data.title,
         price: Number.parseFloat(data.price),
         description: data.description,
+        brand: data.brand,
         category: data.category.join(' '),
         img: mainImageUrl,
         img1: secondaryImageUrl,

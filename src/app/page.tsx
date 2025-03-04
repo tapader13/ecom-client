@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import NewRelease from '@/components/NewRelease';
 import SecondHero from '@/components/SecondHero';
+import ShirtItems from '@/components/ShirtItems';
 import SpecialPart from '@/components/SpecialPart';
 import Tranding from '@/components/Tranding';
 
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <SecondHero />
       <NewRelease />
+      <ShirtItems />
       <BraSpotlite />
       <Tranding />
       <Boundle />

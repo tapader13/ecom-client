@@ -14,7 +14,7 @@ import { QuickDialog } from './QuickDialog';
 import Link from 'next/link';
 import { QuickView } from './QuickView';
 
-export function CarosulNewRelase() {
+export function CarosulShirtItems() {
   const [hoveredImages, setHoveredImages] = useState<{ [key: number]: string }>(
     {}
   );
@@ -26,11 +26,11 @@ export function CarosulNewRelase() {
     setHoveredImages((prev) => ({ ...prev, [id]: image }));
     setSelectedColors((prev) => ({ ...prev, [id]: color }));
   };
-  const { products, getNewReleaseProduct } = useSupabase();
+  const { shirtProducts, getShirtItems } = useSupabase();
   useEffect(() => {
-    getNewReleaseProduct();
+    getShirtItems();
   }, []);
-  const memoizedProducts = useMemo(() => products, [products]);
+  const memoizedProducts = useMemo(() => shirtProducts, [shirtProducts]);
   return (
     <Carousel
       opts={{
