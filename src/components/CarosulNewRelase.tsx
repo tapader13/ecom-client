@@ -37,7 +37,7 @@ export function CarosulNewRelase({ products }: { products: any }) {
       className='w-full'
     >
       <CarouselContent>
-        {memoizedProducts.map((item) => {
+        {memoizedProducts.map((item: any) => {
           const hoveredImage = hoveredImages[item.id] || item.img;
           const selectedColor = selectedColors[item.id];
           console.log(hoveredImage, selectedColor, 2);
@@ -103,7 +103,7 @@ export function CarosulNewRelase({ products }: { products: any }) {
                           ${item.price}
                         </p>
                         <div className='flex gap-3'>
-                          {item.colors.map((it) => (
+                          {item.colors.map((it: any) => (
                             <div
                               key={it.color}
                               className={`h-5 w-5 sm:h-7 sm:w-7 rounded-full cursor-pointer border-[1px] p-1 ${
