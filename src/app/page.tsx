@@ -15,7 +15,7 @@ export default function Home() {
       {/* <SecondHero /> */}
       <NewRelease />
       <ShirtItems />
-      <BraSpotlite />
+      {/* <BraSpotlite /> */}
       <Tranding />
       {/* <Boundle /> */}
       {/* <SpecialPart /> */}
