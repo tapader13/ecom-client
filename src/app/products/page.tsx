@@ -46,6 +46,8 @@ const categories = [
   'jeans',
   'pants',
   'shorts',
+  'cargo',
+  'beggi',
 ];
 
 export default function AddProductForm() {
