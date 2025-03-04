@@ -166,6 +166,9 @@ const ProductDetails = ({ params }: { params: { title: string } }) => {
                 ))}
             </div>
           </div>
+          <div className='mb-5'>
+            <p className=' italic'>Brand: {proDlts?.brand}</p>
+          </div>
           <div>
             <Button
               onClick={handleAddToCart}

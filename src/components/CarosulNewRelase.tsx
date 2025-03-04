@@ -95,10 +95,15 @@ export function CarosulNewRelase({ products }: { products: any }) {
                       </Link>
 
                       <div>
-                        <p className='text-tertiary hover:text-priamry transition-all duration-300 font-albert mt-5'>
-                          {item.title.slice(0, 18)}
-                          {item.title.length > 18 && '...'}
-                        </p>
+                        <div className='flex mt-5 justify-between items-center'>
+                          <p className='text-tertiary hover:text-priamry transition-all duration-300 font-albert uppercase'>
+                            {item.title.slice(0, 18)}
+                            {item.title.length > 18 && '...'}
+                          </p>
+                          <p className='bg-gray-500 text-white px-2 py-1 rounded-md'>
+                            {item.brand}
+                          </p>
+                        </div>
                         <p className='mt-3 mb-3 font-albert text-black font-bold'>
                           ${item.price}
                         </p>
