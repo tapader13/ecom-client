@@ -19,6 +19,7 @@ interface Product {
   category: string;
   colors: Color[];
   size: string[];
+  brand: string;
 }
 interface DynamicData {
   price: number;
