@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className='font-young'>
       <Hero />
-      <SecondHero />
+      {/* <SecondHero /> */}
       <NewRelease />
       <ShirtItems />
       <BraSpotlite />
