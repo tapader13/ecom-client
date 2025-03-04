@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { supabase } from '../supabase/product';
+import { getAdapter } from 'axios';
 
 interface Color {
   color: string;
@@ -30,6 +31,8 @@ export const useSupabase = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [shirtProducts, setShirtProducts] = useState<Product[]>([]);
   const [pantProducts, setPantProducts] = useState<Product[]>([]);
+  const [beggiProducts, setBeggiProducts] = useState<Product[]>([]);
+  const [cargoProducts, setCargoProducts] = useState<Product[]>([]);
   const [product, setProduct] = useState<Product>();
   const [proDlts, setProDlts] = useState<Product>();
   const [menProduct, setMenProduct] = useState<Product[]>([]);
@@ -133,8 +136,12 @@ export const useSupabase = () => {
           colors,
         };
       });
-
-      setPantProducts(parsedData);
+      if (str === 'pant') {
+        setPantProducts(parsedData);
+      }
+      if (str === 'beggi') {
+        setBeggiProducts(parsedData);
+      }
     }
   };
   const getSingleProduct = async (id: string) => {
@@ -443,6 +450,7 @@ export const useSupabase = () => {
     shirtProducts,
     getShirtItems,
     getSrcProduct,
+    beggiProducts,
     getDynamicProduct,
     getBoundleProduct1,
     getBoundleProduct2,

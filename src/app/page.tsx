@@ -1,3 +1,4 @@
+import BeggiItems from '@/components/BeggiItems';
 import Boundle from '@/components/Boundle';
 import BraSpotlite from '@/components/BraSpotlite';
 import Footer from '@/components/Footer';
@@ -17,6 +18,7 @@ export default function Home() {
       <NewRelease />
       <ShirtItems />
       <PaintItems />
+      <BeggiItems />
       {/* <BraSpotlite /> */}
       <Tranding />
       {/* <Boundle /> */}
