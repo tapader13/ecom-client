@@ -142,6 +142,9 @@ export const useSupabase = () => {
       if (str === 'beggi') {
         setBeggiProducts(parsedData);
       }
+      if (str === 'cargo') {
+        setCargoProducts(parsedData);
+      }
     }
   };
   const getSingleProduct = async (id: string) => {
@@ -442,6 +445,7 @@ export const useSupabase = () => {
     menProduct,
     product1,
     product2,
+    cargoProducts,
     product3,
     dynamicProduct,
     srcProduct,

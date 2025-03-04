@@ -1,6 +1,7 @@
 import BeggiItems from '@/components/BeggiItems';
 import Boundle from '@/components/Boundle';
 import BraSpotlite from '@/components/BraSpotlite';
+import CargoItems from '@/components/CargoItems';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import NewRelease from '@/components/NewRelease';
@@ -19,6 +20,7 @@ export default function Home() {
       <ShirtItems />
       <PaintItems />
       <BeggiItems />
+      <CargoItems />
       {/* <BraSpotlite /> */}
       <Tranding />
       {/* <Boundle /> */}
