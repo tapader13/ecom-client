@@ -17,8 +17,8 @@ export default function Home() {
       <ShirtItems />
       <BraSpotlite />
       <Tranding />
-      <Boundle />
-      <SpecialPart />
+      {/* <Boundle /> */}
+      {/* <SpecialPart /> */}
       <Footer />
     </div>
   );
