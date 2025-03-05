@@ -34,6 +34,9 @@ import {
 import { HexColorPicker } from '@/components/HexColorPicker';
 import { uploadImageInImgBb } from '@/lib/uploadImage';
 import { supabase } from '@/lib/supabase/product';
+import { useAppSelector } from '@/lib/redux/hooks';
+import { getUser } from '@/lib/redux/user/userSlice';
+import { redirect } from 'next/navigation';
 
 const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const categories = [
@@ -232,7 +235,12 @@ export default function AddProductForm() {
       setIsUploading(false);
     }
   };
-
+  const userData = useAppSelector(getUser);
+  if (
+    userData?.user?.user_metadata?.email !==
+    process.env.NEXT_PUBLIC_EMAIL_ADDRESS
+  )
+    return redirect('/');
   return (
     <Card className='max-w-3xl mx-auto mt-10'>
       <CardHeader>
