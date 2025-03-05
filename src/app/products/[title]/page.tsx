@@ -72,6 +72,7 @@ const ProductDetails = ({ params }: { params: { title: string } }) => {
     setSelectedColors(i);
   };
   // console.log(proDlts, 'prd');
+  const whatsappLink = `https://wa.me/+8801703297407?text=হাই%2C%20আমি%20এই%20পণ্যটি%20কিনতে%20চাই%3A%0A%0A%20%20পণ্যের%20নাম%3A%20${proDlts?.title}%0A%20%20পণ্যের%20মূল্য%3A%20${proDlts?.price}%0A%20%20পণ্যের%20সাইজ%3A%20${proDlts?.size[size]}`;
   return (
     <div className='cont px-5 sm:px-0'>
       <div className='my-5'>
@@ -169,14 +170,16 @@ const ProductDetails = ({ params }: { params: { title: string } }) => {
           <div className='mb-5'>
             <p className=' italic'>Brand: {proDlts?.brand}</p>
           </div>
-          <div>
-            <Button
-              onClick={handleAddToCart}
-              className='bg-black px-10 text-white font-albert font-bold'
-              type='submit'
+          <div className='mx-auto'>
+            <a
+              href={whatsappLink}
+              target='_blank'
+              onClick={(e) => e.stopPropagation()}
+              rel='noopener noreferrer'
+              className='bg-black px-10 py-2 z-50 rounded-md text-white font-albert font-bold'
             >
-              Add To Cart
-            </Button>
+              Order Now
+            </a>
           </div>
           <div className=''>
             <p className='mt-5 font-albert font-normal'>
