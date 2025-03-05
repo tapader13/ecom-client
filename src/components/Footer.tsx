@@ -24,15 +24,28 @@ const Footer = () => {
           <div>
             <h3 className='text-2xl font-young'>Contact</h3>
             <ul className='font-albert'>
-              <li>Email: minhajtapader0@gmail.com</li>
-              <li>Phone: 01786224382</li>
+              <li>Email: majedahmed139z@gmail.com</li>
+              <li>WhatsApp: +880 1703-297407</li>
               <li>Address: Zakigonj,Sylhet</li>
             </ul>
           </div>
         </div>
         <hr className='my-5 border-t-2 border-dashed border-tertiary opacity-50' />
         <div className='text-center'>
-          <p className='opacity-60'>@All right reserved by minhaj</p>
+          <p className='opacity-60'>
+            @All right reserved by Majed {new Date().getFullYear()}
+          </p>
+          <p className='opacity-60'>
+            Developed by{' '}
+            <a
+              href='https://wa.me/+8801786224382'
+              target='_blank'
+              rel='noreferrer'
+              className='underline hover:text-tertiary'
+            >
+              Md: Minhaj Uddin Tapader
+            </a>
+          </p>
         </div>
       </div>
     </div>
