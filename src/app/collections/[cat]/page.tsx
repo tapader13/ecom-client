@@ -61,7 +61,7 @@ const themes = [
 ];
 
 const CategoryPage = ({ params }: { params: { cat: string } }) => {
-  const [price, setPrice] = useState(100);
+  const [price, setPrice] = useState(500);
   const [colors, setColors] = useState<string[]>([]);
   const [size, setSize] = useState<string[]>([]);
   const [sort, setSort] = useState({ _sort: '', _order: '' });
@@ -81,6 +81,7 @@ const CategoryPage = ({ params }: { params: { cat: string } }) => {
     setPage(1);
   }, [price, sort, colors, size]);
   console.log(dynamicProduct, category, 'dy', sort);
+  console.log(category, 'cat', price, category, colors, size, sort);
   return (
     <div>
       <div className='bg-[#FCF3F2] flex flex-col items-center justify-center py-14'>
@@ -158,7 +159,7 @@ const CategoryPage = ({ params }: { params: { cat: string } }) => {
                           <Slider
                             defaultValue={[price]}
                             onValueChange={(value) => setPrice(value[0])}
-                            max={400}
+                            max={5000}
                             step={1}
                           />
                           <div className='my-5'>

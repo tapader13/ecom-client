@@ -353,13 +353,18 @@ export const useSupabase = () => {
     sort,
   }: DynamicData) => {
     console.log(price, category, colors, size, 1);
+
     let query = supabase.from('products').select('*').lte('price', `${price}`);
+    console.log(query, 'query');
     if (category) {
       query = query.ilike('category', `%${category}%`);
     }
-    if (size && size.length > 0) {
+
+    // ✅ Only apply `size` filter if it's defined and not empty
+    if (Array.isArray(size) && size.length > 0) {
       query = query.contains('size', size);
     }
+
     const { data, error } = await query;
     if (error) {
       console.log(error.message);
@@ -368,9 +373,9 @@ export const useSupabase = () => {
 
     if (data) {
       const parsedData = data.map((product) => {
-        let colors: Color[] = [];
+        let parsedColors: Color[] = [];
         try {
-          colors =
+          parsedColors =
             typeof product.colors === 'string'
               ? JSON.parse(product.colors)
               : product.colors;
@@ -380,11 +385,14 @@ export const useSupabase = () => {
 
         return {
           ...product,
-          colors,
+          colors: parsedColors,
         };
       });
+
       let filteredData = parsedData;
-      if (colors && colors.length > 0) {
+
+      // ✅ Only apply `colors` filter if it's defined and not empty
+      if (Array.isArray(colors) && colors.length > 0) {
         filteredData = parsedData.filter((product) => {
           return colors.every((color) =>
             product.colors.some(
@@ -394,20 +402,23 @@ export const useSupabase = () => {
           );
         });
       }
-      const { _sort, _order } = sort;
-      if (_sort && _order) {
+
+      // Sorting logic
+      if (sort?._sort && sort?._order) {
         filteredData = filteredData.sort((a: any, b: any) => {
-          if (_order === 'asc') {
-            return a[_sort] > b[_sort] ? 1 : -1;
-          } else if (_order === 'desc') {
-            return a[_sort] < b[_sort] ? 1 : -1;
+          if (sort._order === 'asc') {
+            return a[sort._sort] > b[sort._sort] ? 1 : -1;
+          } else if (sort._order === 'desc') {
+            return a[sort._sort] < b[sort._sort] ? 1 : -1;
           }
           return 0;
         });
       }
+
       setDynamicProduct(filteredData);
     }
   };
+
   const getSrcProduct = async (src: string) => {
     const { data, error } = await supabase
       .from('products')
