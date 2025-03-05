@@ -52,6 +52,15 @@ const Header = () => {
                 </Link>
               </div>
             )}
+          {userData &&
+            userData?.user?.user_metadata?.email ===
+              process.env.NEXT_PUBLIC_EMAIL_ADDRESS && (
+              <div>
+                <Link href={'/dashboard'} className=' cursor-pointer'>
+                  Dashboard
+                </Link>
+              </div>
+            )}
           <div>
             <SearchPart />
           </div>

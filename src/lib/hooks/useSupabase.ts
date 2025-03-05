@@ -30,6 +30,7 @@ interface DynamicData {
 }
 export const useSupabase = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [dashboardProducts, setDashboardProducts] = useState<Product[]>([]);
   const [shirtProducts, setShirtProducts] = useState<Product[]>([]);
   const [pantProducts, setPantProducts] = useState<Product[]>([]);
   const [beggiProducts, setBeggiProducts] = useState<Product[]>([]);
@@ -73,6 +74,36 @@ export const useSupabase = () => {
       });
 
       setProducts(parsedData);
+    }
+  };
+  const getDashboardProduct = async () => {
+    const { data, error } = await supabase.from('products').select('*');
+
+    if (error) {
+      console.log(error.message);
+      return;
+    }
+
+    if (data) {
+      const parsedData = data.map((product) => {
+        // Check if colors need parsing
+        let colors: Color[] = [];
+        try {
+          colors =
+            typeof product.colors === 'string'
+              ? JSON.parse(product.colors)
+              : product.colors;
+        } catch (e) {
+          console.error('Error parsing colors:', e);
+        }
+
+        return {
+          ...product,
+          colors,
+        };
+      });
+
+      setDashboardProducts(parsedData);
     }
   };
   const getShirtItems = async () => {
@@ -463,6 +494,8 @@ export const useSupabase = () => {
     srcProduct,
     pantProducts,
     getPantItems,
+    dashboardProducts,
+    getDashboardProduct,
     shirtProducts,
     getShirtItems,
     getSrcProduct,
