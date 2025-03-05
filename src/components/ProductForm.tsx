@@ -48,7 +48,7 @@ export function ProductForm({ product, onSave, onCancel }: ProductFormProps) {
     color: '',
     fakeImg: '',
   });
-
+  console.log(formData, 'formData');
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -202,11 +202,10 @@ export function ProductForm({ product, onSave, onCancel }: ProductFormProps) {
             />
             {formData.img && (
               <div className='mt-2 relative h-32 w-32'>
-                <Image
+                <img
                   src={formData.img || '/placeholder.svg'}
                   alt='Main product image'
-                  fill
-                  className='object-cover rounded-md'
+                  className='object-cover h-full w-full rounded-md'
                 />
               </div>
             )}
@@ -223,11 +222,10 @@ export function ProductForm({ product, onSave, onCancel }: ProductFormProps) {
             />
             {formData.img1 && (
               <div className='mt-2 relative h-32 w-32'>
-                <Image
+                <img
                   src={formData.img1 || '/placeholder.svg'}
                   alt='Secondary product image'
-                  fill
-                  className='object-cover rounded-md'
+                  className='object-cover h-full w-full rounded-md'
                 />
               </div>
             )}
