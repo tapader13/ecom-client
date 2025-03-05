@@ -34,6 +34,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { ProductForm } from '@/components/ProductForm';
 import { useSupabase } from '@/lib/hooks/useSupabase';
+import { supabase } from '@/lib/supabase/product';
 
 // Define the Color type
 interface Color {
@@ -200,10 +201,21 @@ export default function ProductsPage() {
     setIsViewDialogOpen(true);
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     if (selectedProduct) {
-      setProducts(products.filter((p) => p.id !== selectedProduct.id));
-      setIsDeleteDialogOpen(false);
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .delete()
+          .eq('id', selectedProduct.id);
+        if (error) {
+          throw error;
+        }
+        setProducts(products.filter((p) => p.id !== selectedProduct.id));
+        setIsDeleteDialogOpen(false);
+      } catch (error) {
+        console.log('Error deleting product:', error);
+      }
     }
   };
 
