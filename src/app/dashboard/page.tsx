@@ -32,9 +32,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { ProductForm } from '@/components/ProductForm';
 import { useSupabase } from '@/lib/hooks/useSupabase';
 import { supabase } from '@/lib/supabase/product';
+import ProductForm from '@/components/ProductForm';
 
 // Define the Color type
 interface Color {
