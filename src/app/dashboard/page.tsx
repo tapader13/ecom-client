@@ -219,12 +219,12 @@ export default function ProductsPage() {
     }
   };
 
-  const saveProduct = (updatedProduct: Product) => {
-    setProducts(
-      products.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
-    );
-    setIsUpdateDialogOpen(false);
-  };
+  // const saveProduct = (updatedProduct: Product) => {
+  //   setProducts(
+  //     products.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
+  //   );
+  //   setIsUpdateDialogOpen(false);
+  // };
 
   return (
     <div className='cont mx-auto py-10'>
@@ -340,7 +340,7 @@ export default function ProductsPage() {
           {selectedProduct && (
             <ProductForm
               product={selectedProduct}
-              onSave={saveProduct}
+              // onSave={saveProduct}
               onCancel={() => setIsUpdateDialogOpen(false)}
             />
           )}

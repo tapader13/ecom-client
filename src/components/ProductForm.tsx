@@ -1,4 +1,5 @@
 'use client';
+
 type ProductFormValues = {
   title: string;
   price: string;
@@ -37,7 +38,7 @@ interface Product {
 
 interface ProductFormProps {
   product: Product;
-  onSave: (product: Product) => void;
+  // onSave: (product: Product) => void;
   onCancel: () => void;
 }
 import { useEffect, useState } from 'react';
@@ -80,7 +81,7 @@ const categories = [
 
 export default function ProductForm({
   product,
-  onSave,
+  // onSave,
   onCancel,
 }: ProductFormProps) {
   const {
@@ -510,10 +511,16 @@ export default function ProductForm({
                           checked={field.value?.includes(category)}
                           onCheckedChange={(checked) => {
                             const currentCategories = field.value || [];
+                            const categoriesArray: string[] = Array.isArray(
+                              currentCategories
+                            )
+                              ? currentCategories
+                              : [currentCategories];
+
                             console.log(currentCategories, 'currentCategories');
                             const updatedCategories = checked
-                              ? [...currentCategories, category]
-                              : currentCategories.filter((c) => c !== category);
+                              ? [...categoriesArray, category]
+                              : categoriesArray.filter((c) => c !== category);
                             console.log(updatedCategories, 'updatedCategories');
                             field.onChange(updatedCategories);
                           }}
