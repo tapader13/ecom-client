@@ -4,7 +4,7 @@ type ProductFormValues = {
   price: string;
   description: string;
   brand: string;
-  category: string[];
+  category: string | string[];
   sizes: string[];
   colors: {
     hex: string;
@@ -27,7 +27,7 @@ interface Product {
   title: string;
   price: number;
   description: string;
-  category: string[];
+  category: string | string[];
   img: string;
   img1: string;
   colors: Color[];
@@ -189,6 +189,7 @@ export default function ProductForm({
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setMainImage(URL.createObjectURL(file));
+      setIsMainImageChanged(true);
       setValue('img', file);
     }
   };
@@ -197,6 +198,7 @@ export default function ProductForm({
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setSecondaryImage(URL.createObjectURL(file));
+      setIsSecondaryImageChanged(true);
       setValue('img1', file);
     }
   };
@@ -263,25 +265,26 @@ export default function ProductForm({
         price: Number.parseFloat(data.price),
         description: data.description,
         brand: data.brand,
-        category: data.category,
+        category: data.category.join(' '),
         img: mainImageUrl,
         img1: secondaryImageUrl,
         colors: JSON.stringify(processedColors),
         size: data.sizes,
       };
       console.log(formattedData, 'formattedData');
-      // const { data: insertData, error } = await supabase
-      //   .from('products')
-      //   .insert([formattedData]);
-      // if (error) {
-      //   console.log(error, 'error');
-      //   toast.error('An error occurred while adding the product');
-      //   setIsUploading(false);
-      //   return;
-      // }
-      // if (insertData) toast.success('Product added successfully');
-      // if (data) toast.success('Product added successfully');
-      // console.log(data, 'data');
+      const { data: updateData, error } = await supabase
+        .from('products')
+        .update(formattedData)
+        .eq('id', product?.id);
+      if (error) {
+        console.log(error, 'error');
+        toast.error('An error occurred while updating the product');
+        setIsUploading(false);
+        return;
+      }
+      if (updateData) toast.success('Product updated successfully');
+
+      console.log(updateData, 'data');
     } catch (error) {
       console.error('Error processing product:', error);
       toast.error('An error occurred while adding the product');
