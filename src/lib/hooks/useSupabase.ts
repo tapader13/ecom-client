@@ -33,6 +33,7 @@ export const useSupabase = () => {
   const [dashboardProducts, setDashboardProducts] = useState<Product[]>([]);
   const [shirtProducts, setShirtProducts] = useState<Product[]>([]);
   const [pantProducts, setPantProducts] = useState<Product[]>([]);
+  const [babyProducts, setBabyProducts] = useState<Product[]>([]);
   const [beggiProducts, setBeggiProducts] = useState<Product[]>([]);
   const [cargoProducts, setCargoProducts] = useState<Product[]>([]);
   const [product, setProduct] = useState<Product>();
@@ -176,6 +177,10 @@ export const useSupabase = () => {
       }
       if (str === 'cargo') {
         setCargoProducts(parsedData);
+      }
+      if (str === 'baby') {
+        console.log(parsedData, 'parsedData');
+        setBabyProducts(parsedData);
       }
     }
   };
@@ -493,6 +498,7 @@ export const useSupabase = () => {
     dynamicProduct,
     srcProduct,
     pantProducts,
+    babyProducts,
     getPantItems,
     dashboardProducts,
     getDashboardProduct,

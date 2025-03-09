@@ -1,3 +1,4 @@
+import BabyItems from '@/components/BabyItems';
 import BeggiItems from '@/components/BeggiItems';
 import Boundle from '@/components/Boundle';
 import BraSpotlite from '@/components/BraSpotlite';
@@ -16,6 +17,7 @@ export default function Home() {
     <div className='font-young'>
       {/* <Hero /> */}
       {/* <SecondHero /> */}
+      <BabyItems />
       <NewRelease />
       <ShirtItems />
       <PaintItems />
