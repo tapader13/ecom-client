@@ -14,7 +14,7 @@ import Tranding from '@/components/Tranding';
 export default function Home() {
   return (
     <div className='font-young'>
-      <Hero />
+      {/* <Hero /> */}
       {/* <SecondHero /> */}
       <NewRelease />
       <ShirtItems />
