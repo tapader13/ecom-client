@@ -35,6 +35,9 @@ import {
 import { useSupabase } from '@/lib/hooks/useSupabase';
 import { supabase } from '@/lib/supabase/product';
 import ProductForm from '@/components/ProductForm';
+import { useAppSelector } from '@/lib/redux/hooks';
+import { getUser } from '@/lib/redux/user/userSlice';
+import { redirect } from 'next/navigation';
 
 // Define the Color type
 interface Color {
@@ -225,7 +228,12 @@ export default function ProductsPage() {
   //   );
   //   setIsUpdateDialogOpen(false);
   // };
-
+  const userData = useAppSelector(getUser);
+  if (
+    userData?.user?.user_metadata?.email !==
+    process.env.NEXT_PUBLIC_EMAIL_ADDRESS
+  )
+    return redirect('/');
   return (
     <div className='cont mx-auto py-10'>
       <h1 className='text-3xl font-bold mb-6'>Product Management</h1>
