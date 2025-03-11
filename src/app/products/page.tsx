@@ -138,25 +138,18 @@ export default function AddProductForm() {
   const watchedColors = watch('colors') || [];
   const watchedCategory = watch('category');
 
-  useEffect(() => {
-    // Determine the available sizes based on the selected category
-    let newAvailableSizes: string[];
-    if (watchedCategory.includes('pants')) {
-      newAvailableSizes = availableSizesPant;
-    } else if (watchedCategory.includes('baby')) {
-      newAvailableSizes = avalilableSizesBaby;
-    } else {
-      newAvailableSizes = availableSizes;
-    }
+  // useEffect(() => {
+  //   // Determine the available sizes based on the selected category
+  //   const newAvailableSizes = watchedCategory.includes('pants')
+  //     ? availableSizesPant
+  //     : watchedCategory.includes('baby')
+  //     ? avalilableSizesBaby
+  //     : availableSizes;
 
-    // Filter the currently selected sizes to only include those that are valid for the new category
-    const validSizes = watchedCategory.filter((size) =>
-      newAvailableSizes.includes(size)
-    );
+  //   console.log(watchedCategory, 'watchedCategory');
+  //   console.log(newAvailableSizes, 'newAvailableSizes');
+  // }, [watchedCategory, setValue]);
 
-    // Update the sizes field with the valid sizes
-    setValue('sizes', validSizes);
-  }, [watchedCategory, setValue]);
   const handleMainImageChange = (e: any) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
