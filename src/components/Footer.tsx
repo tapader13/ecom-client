@@ -25,8 +25,10 @@ const Footer = () => {
             <h3 className='text-2xl font-young'>Contact</h3>
             <ul className='font-albert'>
               <li>Email: majedahmed139z@gmail.com</li>
-              <li>WhatsApp: +880 1703-297407</li>
-              <li>Address: Zakigonj,Sylhet</li>
+              <li>WhatsApp: +880 1619-327606</li>
+              <li>
+                Address: Rukeya Mention 2nd floor Zokigonj Bazar Sylhet 3190
+              </li>
             </ul>
           </div>
         </div>
