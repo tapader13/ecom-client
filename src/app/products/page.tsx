@@ -15,7 +15,7 @@ type ProductFormValues = {
   img?: File | null;
   img1?: File | null;
 };
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { X, Plus, Upload, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -39,6 +39,8 @@ import { getUser } from '@/lib/redux/user/userSlice';
 import { redirect } from 'next/navigation';
 
 const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+const availableSizesPant = ['28', '30', '32', '34', '36', '38'];
+const avalilableSizesBaby = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 const categories = [
   'newrelease',
   'women',
@@ -52,7 +54,7 @@ const categories = [
   'cargo',
   'beggi',
   'baby',
-  "sports"
+  'sports',
 ];
 
 export default function AddProductForm() {
@@ -134,7 +136,27 @@ export default function AddProductForm() {
   const [isUploading, setIsUploading] = useState(false);
 
   const watchedColors = watch('colors') || [];
+  const watchedCategory = watch('category');
 
+  useEffect(() => {
+    // Determine the available sizes based on the selected category
+    let newAvailableSizes: string[];
+    if (watchedCategory.includes('pants')) {
+      newAvailableSizes = availableSizesPant;
+    } else if (watchedCategory.includes('baby')) {
+      newAvailableSizes = avalilableSizesBaby;
+    } else {
+      newAvailableSizes = availableSizes;
+    }
+
+    // Filter the currently selected sizes to only include those that are valid for the new category
+    const validSizes = watchedCategory.filter((size) =>
+      newAvailableSizes.includes(size)
+    );
+
+    // Update the sizes field with the valid sizes
+    setValue('sizes', validSizes);
+  }, [watchedCategory, setValue]);
   const handleMainImageChange = (e: any) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
@@ -489,7 +511,12 @@ export default function AddProductForm() {
                 rules={{ required: 'Select at least one size' }}
                 render={({ field }) => (
                   <>
-                    {availableSizes.map((size) => (
+                    {(watchedCategory.includes('pants')
+                      ? availableSizesPant
+                      : watchedCategory.includes('baby')
+                      ? avalilableSizesBaby
+                      : availableSizes
+                    ).map((size) => (
                       <div key={size} className='flex items-center space-x-2'>
                         <Checkbox
                           id={`size-${size}`}
