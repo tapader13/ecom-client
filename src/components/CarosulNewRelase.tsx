@@ -96,7 +96,7 @@ export function CarosulNewRelase({ products }: { products: any }) {
 
                       <div>
                         <div className='flex mt-5 justify-between items-center'>
-                          <p className='text-tertiary hover:text-priamry transition-all duration-300 font-albert uppercase'>
+                          <p className='bg-gray-500 text-white px-2 py-1 rounded-md hover:text-priamry transition-all duration-300 font-albert uppercase'>
                             {item.title.slice(0, 18)}
                             {item.title.length > 18 && '...'}
                           </p>
@@ -104,8 +104,8 @@ export function CarosulNewRelase({ products }: { products: any }) {
                             {item.brand}
                           </p>
                         </div>
-                        <p className='mt-3 mb-3 font-albert text-black font-bold'>
-                          ${item.price}
+                        <p className='mt-3 mb-3 font-albert text-red-500 font-bold'>
+                          ৳ {item.price}TK
                         </p>
                         <div className='flex gap-3'>
                           {item.colors.map((it: any) => (
