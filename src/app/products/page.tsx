@@ -52,6 +52,7 @@ const categories = [
   'cargo',
   'beggi',
   'baby',
+  "sports"
 ];
 
 export default function AddProductForm() {

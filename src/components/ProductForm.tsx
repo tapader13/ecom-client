@@ -77,6 +77,8 @@ const categories = [
   'shorts',
   'cargo',
   'beggi',
+  'baby',
+  'sports',
 ];
 
 export default function ProductForm({
