@@ -72,7 +72,7 @@ const ProductDetails = ({ params }: { params: { title: string } }) => {
     setSelectedColors(i);
   };
   // console.log(proDlts, 'prd');
-  const whatsappLink = `https://wa.me/+8801703297407?text=হাই%2C%20আমি%20এই%20পণ্যটি%20কিনতে%20চাই%3A%0A%0A%20%20পণ্যের%20নাম%3A%20${proDlts?.title}%0A%20%20পণ্যের%20মূল্য%3A%20${proDlts?.price}%0A%20%20পণ্যের%20সাইজ%3A%20${proDlts?.size[size]}`;
+  const whatsappLink = `https://wa.me/+8801619327606?text=হাই%2C%20আমি%20এই%20পণ্যটি%20কিনতে%20চাই%3A%0A%0A%20%20পণ্যের%20নাম%3A%20${proDlts?.title}%0A%20%20পণ্যের%20মূল্য%3A%20${proDlts?.price}%0A%20%20পণ্যের%20সাইজ%3A%20${proDlts?.size[size]}`;
   return (
     <div className='cont px-5 sm:px-0'>
       <div className='my-5'>
