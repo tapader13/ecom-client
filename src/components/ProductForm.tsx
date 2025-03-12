@@ -65,6 +65,8 @@ import { getUser } from '@/lib/redux/user/userSlice';
 import { redirect } from 'next/navigation';
 
 const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+const availableSizesPant = ['28', '30', '32', '34', '36', '38'];
+const avalilableSizesBaby = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 const categories = [
   'newrelease',
   'women',
@@ -296,6 +298,7 @@ export default function ProductForm({
     }
   };
   const userData = useAppSelector(getUser);
+  const watchedCategory = watch('category');
   if (
     userData?.user?.user_metadata?.email !==
     process.env.NEXT_PUBLIC_EMAIL_ADDRESS
@@ -563,7 +566,12 @@ export default function ProductForm({
                 rules={{ required: 'Select at least one size' }}
                 render={({ field }) => (
                   <>
-                    {availableSizes.map((size) => (
+                    {(watchedCategory.includes('pants')
+                      ? availableSizesPant
+                      : watchedCategory.includes('baby')
+                      ? avalilableSizesBaby
+                      : availableSizes
+                    ).map((size) => (
                       <div key={size} className='flex items-center space-x-2'>
                         <Checkbox
                           id={`size-${size}`}
