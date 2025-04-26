@@ -80,7 +80,7 @@ const ProductDetails = ({ params }: { params: { title: string } }) => {
       </div>
       <div className='grid sm:grid-cols-2 grid-cols-1 gap-10 '>
         <div className='grid sm:grid-cols-12 grid-cols-1 gap-3 h-[500px]'>
-          <div className='sm:col-span-2 order-1 sm:order-none h-full gap-3 flex sm:flex-col flex-row  justify-between'>
+          <div className='sm:col-span-2 order-1 sm:order-none h-full gap-3 flex sm:flex-col flex-row sm:justify-start  justify-between '>
             {proDlts &&
               proDlts?.colors?.map((img, i) => (
                 <div
@@ -96,7 +96,7 @@ const ProductDetails = ({ params }: { params: { title: string } }) => {
                 </div>
               ))}
           </div>
-          <div className='sm:col-span-10 sm:h-[600px] h-[400px]'>
+          <div className='sm:col-span-10 sm:h-full h-[400px]'>
             {proDlts && (
               <div className='w-full h-full'>
                 <img
@@ -118,14 +118,14 @@ const ProductDetails = ({ params }: { params: { title: string } }) => {
             </p>
           </div>
           <div className='my-5'>
-            <p className='mb-3'>
+            <p className='mb-3 '>
               {proDlts && proDlts.size ? (
                 <span>Size :{proDlts?.size[size]}</span>
               ) : (
                 'not found'
               )}
             </p>
-            <div className=' flex gap-3'>
+            <div className=' flex gap-3 flex-wrap'>
               {proDlts?.size?.map((siz, i) => (
                 <Button
                   key={siz}
