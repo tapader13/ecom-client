@@ -96,11 +96,11 @@ export function CarosulNewRelase({ products }: { products: any }) {
 
                       <div>
                         <div className='flex mt-5 justify-between items-center'>
-                          <p className='bg-gray-500 text-white px-2 py-1 rounded-md hover:text-priamry transition-all duration-300 font-albert uppercase'>
+                          <p className='text-gray-500 px-2 py-1 rounded-md hover:text-priamry transition-all duration-300 font-albert uppercase'>
                             {item.title.slice(0, 18)}
                             {item.title.length > 18 && '...'}
                           </p>
-                          <p className='bg-gray-500 text-white px-2 py-1 rounded-md'>
+                          <p className='text-gray-500  px-2 py-1 rounded-md'>
                             {item.brand}
                           </p>
                         </div>

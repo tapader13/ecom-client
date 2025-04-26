@@ -194,7 +194,7 @@ export function QuickView({ id }: { id: string }) {
             <div className='grid sm:grid-cols-2 grid-cols-1 gap-10'>
               {/* Left side - Product Image */}
               <div className='grid sm:grid-cols-12 grid-cols-1 gap-3 h-[500px]'>
-                <div className='sm:col-span-12 sm:h-[600px] h-[400px]'>
+                <div className='sm:col-span-12 sm:h-[400px] h-[400px]'>
                   <img
                     src={imageSrc || product?.img}
                     alt={product?.title}
