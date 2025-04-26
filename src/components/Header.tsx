@@ -18,6 +18,7 @@ import { LogOut, LogIn } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/provider/AuthProvider';
 import { getUser, setUserInfo } from '@/lib/redux/user/userSlice';
+import Image from 'next/image';
 
 const Header = () => {
   const data1 = useAppSelector(getCart);
@@ -35,9 +36,16 @@ const Header = () => {
     <div className='w-screen bg-secondary'>
       <div className='cont flex justify-between items-center py-5 px-2 '>
         <div>
-          <Link href={'/'}>
+          <Link className='flex items-center gap-2' href={'/'}>
+            <Image
+              src='/logo.jpg'
+              alt='logo'
+              width={100}
+              height={100}
+              className='h-10 w-10 rounded-full'
+            />
             <h1 className='text-3xl font-bold font-young cursor-pointer'>
-              Ecomus
+              Top Fashion
             </h1>
           </Link>
         </div>
