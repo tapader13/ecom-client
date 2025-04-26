@@ -219,18 +219,35 @@ export function QuickView({ id }: { id: string }) {
                       'Size not found'
                     )}
                   </p>
-                  <div className='flex gap-3'>
-                    {product?.size?.map((siz, i) => (
-                      <Button
-                        key={siz}
-                        onClick={() => setSize(i)}
-                        className={`rounded-full border-tertiary/35 border bg-white text-black hover:border-black ${
-                          size === i ? 'bg-black text-white' : ''
-                        }`}
-                      >
-                        {siz}
-                      </Button>
-                    ))}
+                  <div className='flex gap-3 items-center'>
+                    {product?.size?.length > 5 ? (
+                      <>
+                        {product.size.slice(0, 5).map((siz, i) => (
+                          <Button
+                            key={siz}
+                            onClick={() => setSize(i)}
+                            className={`rounded-full border-tertiary/35 border bg-white text-black hover:border-black ${
+                              size === i ? 'bg-black text-white' : ''
+                            }`}
+                          >
+                            {siz}
+                          </Button>
+                        ))}
+                        <span className='text-gray-500'>...</span>
+                      </>
+                    ) : (
+                      product?.size?.map((siz, i) => (
+                        <Button
+                          key={siz}
+                          onClick={() => setSize(i)}
+                          className={`rounded-full border-tertiary/35 border bg-white text-black hover:border-black ${
+                            size === i ? 'bg-black text-white' : ''
+                          }`}
+                        >
+                          {siz}
+                        </Button>
+                      ))
+                    )}
                   </div>
                 </div>
 
